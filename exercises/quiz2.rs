@@ -40,8 +40,7 @@ mod my_module {
                 Command::Uppercase => output.push(string.to_uppercase()),
                 Command::Trim => output.push(string.trim().to_string()),
                 Command::Append(num) => {
-                    let new_string: String = string.to_string() + "bar".repeat(*num).as_str();
-                    output.push(new_string);
+                    output.push(string.to_string() + &"bar".repeat(*num));
                 },
             }
         }
