@@ -3,10 +3,34 @@
 	This problem requires you to implement a sorting algorithm
 	you can use bubble sorting, insertion sorting, heap sorting, etc.
 */
-// I AM NOT DONE
 
-fn sort<T>(array: &mut [T]){
-	//TODO
+use std::fmt::Debug;
+
+fn sort<T>(array: &mut [T]) where T: PartialOrd + Copy{
+	quickSort(array, 0, array.len() as u32 - 1);
+}
+
+fn quickSort<T>(array: &mut [T], left: u32, right: u32) where T: PartialOrd + Copy{
+	if left >= right {
+        return;
+    }
+    
+    let x = array[(left + right) as usize / 2];
+    let mut l = left;
+    let mut r = right;
+    while l < r {
+        while array[r as usize] > x {
+            r -= 1;
+        }
+        while array[l as usize] < x {
+            l += 1;
+        }
+        if l < r {
+            array.swap(l as usize, r as usize);
+        }
+    }
+    quickSort(array, left, r);
+    quickSort(array, r + 1, right);
 }
 #[cfg(test)]
 mod tests {
